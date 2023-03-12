@@ -14,7 +14,7 @@
 
 
     {% if title %}
-        <title>Flask blog- {{title }}</title>
+        <title>Flask blog-{{ title }}</title>
     {% else %}
         <title>Flask blog</title>
     {% endif %}
@@ -49,6 +49,15 @@
       <main role="main" class="container">
         <div class="row">
           <div class="col-md-8">
+            {% with messages= get_flashed_messages(with_categories=true) %}
+              {% if messages %}
+                {% for catergory, message in messages %}
+                  <div class="alert alert-{{ category }}">
+                    {{ message }}
+                  </div>
+                {% endfor %}
+              {% endif %}
+            {% endwith %}
             {% block content %}{% endblock %}
           </div>
           <div class="col-md-4">
